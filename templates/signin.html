@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='signin.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignIn</title>
+</head>
+<body>
+<div class = 'container'>
+            <div class = 'header'>
+                <ul type = 'none'>
+                    <form action="http://localhost:5000" method = 'POST'>
+                        <li><button id = 'head' type = 'submit'>ACM-W</button></li>
+                    </form>
+                </ul>
+            </div>
+            <div class = 'enter'>
+            <p id = 'enter' >Username:  <input id = 'box' type = 'text' name = 'username'></p>
+            <p id = 'enter'>Password:  <input id = 'box' type = 'password' name = 'password'></p>
+            </div>
+            <div class = 'but' align="center">
+            <br><br>
+
+                <button id = 'submit' type = 'submit' name = 'opt' value = 'SignIn'>Sign In</button>
+
+            </div>
+</div>
+</body>
+</html>

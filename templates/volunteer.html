@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='volunteer.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer</title>
+</head>
+<body>
+<div class = 'container'>
+            <div class = 'header'>
+                <ul type = 'none'>
+                    <form action="http://localhost:5000" method = 'POST'>
+                        <li><button id = 'head' type = 'submit'>ACM-W</button></li>
+                    </form>
+                </ul>
+            </div>
+            <div class = 'enter'>
+            <font color="white"><h1 align="center" >Register</h1></font>
+            <p id = 'enter' >Name:  <input id = 'box' type = 'text' name = 'name'></p>
+            <p id = 'enter'>Address:  <input id = 'box' type = 'text' name = 'address'></p>
+            <p id = 'enter' >Pincode:  <input id = 'box' type = 'text' name = 'pin'></p>
+            <p id = 'enter'>Phone Number:  <input id = 'box' type = 'text' name = 'number'></p>
+            </div>
+            <div class = 'choice'>
+                <p id = 'combo'>
+                Vegetarian:  <input type = 'radio' name = 'option' value = 'veg'>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Non-vegetarian:  <input type = 'radio' name = 'option' value = 'nonveg'>
+                </p>
+            </div>
+            <div class = 'but' align="center">
+            <br><br>
+                <button id = 'submit' type = 'submit' name = 'opt' value = 'submit'>Submit</button>
+                <br><br>
+                <font color="white"><h1 align="center">Already registered? Sign in</h1></font>
+                <a href="signin"><button id = 'submit' type = 'submit' name = 'opt' value = 'submit'>Sign in</button></a>
+            </div>
+
+
+</div>
+</body>
+</html>

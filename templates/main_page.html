@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='main_page.css')}}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<div class = 'container'>
+            <div class = 'header'>
+                <ul type = 'none'>
+                    <form action="http://localhost:5000" method = 'POST'>
+                        <br><br><br><br><br><br><br><br><br><br><br><br><br>
+                        <li><button id = 'head' type = 'submit'>ACM-W</button></li>
+                    </form>
+                </ul>
+            </div>
+            <div class = 'but'>
+            <br><br>
+               <a href="orderfood"><button id = 'submit' type = 'submit' name = 'opt' value = 'Orderfood'>Order Food</button></a>
+                <a href="volunteer"><button id = 'submit' type = 'submit' name = 'opt' value = 'Volunteer'>Volunteer</button></a>
+            </div>
+</div>
+</body>
+</html>
