@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Volunteer</title>
 </head>
-<body>
+<>
 <div class = 'container'>
             <div class = 'header'>
                 <ul type = 'none'>
-                    <form action="http://localhost:5000" method = 'POST'>
-                        <li><button id = 'head' type = 'submit'>ACM-W</button></li>
-                    </form>
+                       <a href="/"><li><button id = 'head' type = 'submit' >Rootin' For You</button></li></a>
                 </ul>
             </div>
+            <form  method="post">
             <div class = 'enter'>
-            <font color="white"><h1 align="center" >Register</h1></font>
+            <font color="black"><h1 align="center" >Register</h1></font>
             <p id = 'enter' >Name:  <input id = 'box' type = 'text' name = 'name'></p>
             <p id = 'enter'>Address:  <input id = 'box' type = 'text' name = 'address'></p>
             <p id = 'enter' >Pincode:  <input id = 'box' type = 'text' name = 'pin'></p>
+            <p id = 'enter'>Quantity:  <input id = 'box' type = 'text' name = 'quantity'></p>
             <p id = 'enter'>Phone Number:  <input id = 'box' type = 'text' name = 'number'></p>
+            <p id = 'enter'>Password:  <input id = 'box' type = 'password' name = 'password'></p>
             </div>
             <div class = 'choice'>
                 <p id = 'combo'>
@@ -28,16 +29,25 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 Non-vegetarian:  <input type = 'radio' name = 'option' value = 'nonveg'>
                 </p>
+
             </div>
+
             <div class = 'but' align="center">
+                <br><br>
+                <font color="black"><h1 align="center">
+                <p>I hereby declare that I will carry out my <br>responsibility to the best of my capabilities and<br>follow all the safety standards.<input id="box "type="checkbox" name="agree"></p>
+                </h1></font>
             <br><br>
                 <button id = 'submit' type = 'submit' name = 'opt' value = 'submit'>Submit</button>
                 <br><br>
-                <font color="white"><h1 align="center">Already registered? Sign in</h1></font>
+            </div>
+            </form>
+            <div class = 'but' align="center">
+                <font color="black"><h1 align="center">Already registered? Sign in</h1></font>
+                <br><br>
                 <a href="signin"><button id = 'submit' type = 'submit' name = 'opt' value = 'submit'>Sign in</button></a>
             </div>
-
-
 </div>
+
 </body>
 </html>

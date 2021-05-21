@@ -4,10 +4,11 @@
         }
         body
         {
+            background-color: white;
 			margin: 0;
 			padding: 0;
 			font-family: "serif";
-			background: rgba(0, 0, 0, 0.171) url("bg3.png");
+			background: rgba(0, 0, 0, 0.171) url("bg5.png");
 			background-size: cover;
 			background-repeat: no-repeat;
 			background-blend-mode: darken;
@@ -25,7 +26,7 @@
         .container .header ul li button
         {
             margin-left: -20px;
-            width:430px;
+            width:500px;
             background-color: rgba(190, 155, 78, 0.897);
             padding: 15px 16px;
             color:white;
@@ -41,7 +42,7 @@
         {
             width:520px;
             background-color: rgba(190, 155, 78, 0.589);
-            color:white;
+            color: #000000;
             transition-duration: 1s;
             transition-timing-function: cubic-bezier(0.4, 0.82, 0.165, 1);
         }
@@ -54,7 +55,7 @@
 
         #enter
         {
-            color:rgb(255, 225, 225);
+            color: rgb(0, 0, 0);
             font-size:35px;
             text-align: center;
             padding-top: 50px;
@@ -102,6 +103,16 @@
         #combo
         {
             text-align: center;
-            color:rgb(255, 225, 225);
+            color: rgb(0, 0, 0);
             font-size:35px;
+        }
+
+        div.image {
+            content:url(gif3.gif);
+            position:absolute;
+            left:700px;
+            top:500px;
+            width:500px; /*width of your image*/
+            height:500px; /*height of your image*/
+
         }

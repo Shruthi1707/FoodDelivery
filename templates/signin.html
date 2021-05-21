@@ -10,21 +10,22 @@
 <div class = 'container'>
             <div class = 'header'>
                 <ul type = 'none'>
-                    <form action="http://localhost:5000" method = 'POST'>
-                        <li><button id = 'head' type = 'submit'>ACM-W</button></li>
-                    </form>
+                        <a href="/"><li><button id = 'head' type = 'submit' >Rootin' For You</button></li></a>
                 </ul>
             </div>
-            <div class = 'enter'>
-            <p id = 'enter' >Username:  <input id = 'box' type = 'text' name = 'username'></p>
-            <p id = 'enter'>Password:  <input id = 'box' type = 'password' name = 'password'></p>
-            </div>
+
             <div class = 'but' align="center">
             <br><br>
+                <form action="/signin" method="post">
+                    <div class = 'enter'>
+                        <p id = 'enter' >Username:  <input id = 'box' type = 'text' name = 'username'></p>
+                        <p id = 'enter'>Password:  <input id = 'box' type = 'password' name = 'password'></p>
+                    </div>
 
-                <button id = 'submit' type = 'submit' name = 'opt' value = 'SignIn'>Sign In</button>
-
+                    <button id = 'submit' type = 'submit' name = 'opt' value = 'SignIn'>Sign In</button>
+                </form>
             </div>
 </div>
+<div class="image"></div>
 </body>
 </html>

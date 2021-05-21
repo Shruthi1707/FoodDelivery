@@ -1,7 +1,8 @@
 from flask import Flask, redirect, url_for, request, render_template
+
+
 from backend import *
 app = Flask(__name__)
-
 
 
 @app.route('/')
@@ -10,12 +11,15 @@ def main_page():
 
 @app.route('/orderfood', methods=["GET", "POST"])
 def orderfood():
+    global food
     if request.method == "POST":
+        patient_list()
         name = request.form.get("name")
         address = request.form.get("address")
         pin= int(request.form.get('pin'))
-        age=int(request.form.get('age'))
+        quantity=int(request.form.get('quantity'))
         number = int(request.form.get('number'))
+        BUnumber=int(request.form.get('BUnumber'))
         option = request.form.get('option')
         if option == 'veg':
             food='veg'
@@ -33,6 +37,8 @@ def orderfood():
         else:
             pass
         suggestions = request.form.get("suggestions")
+        create_patient(name,address,pin,food,quantity,number)
+        return redirect(url_for('orderconfirmation'))
 
     return render_template("orderfood.html")
 
@@ -41,8 +47,10 @@ def volunteer():
     if request.method == "POST":
         name = request.form.get("name")
         address = request.form.get("address")
+        quantity = request.form.get("quantity")
         pin= int(request.form.get('pin'))
         number = int(request.form.get('number'))
+        password = request.form.get('password')
         option = request.form.get('option')
         if option == 'veg':
             food='veg'
@@ -50,6 +58,8 @@ def volunteer():
             food='nonveg'
         else:
             pass
+        registration_volunteer(name,password,number,address,pin,food,quantity)
+        return redirect(url_for('registerconfirmation'))
 
     return render_template("volunteer.html")
 
@@ -58,16 +68,49 @@ def signin():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
-        getname(username,password)
+        volunteer_list()
+        patients = sign_in(username, password)
+        if patients:
+            return redirect(url_for('display', name=username))
+        else:
+            return redirect(url_for('Invalid'))
     return render_template("signin.html")
 
-def getname(name,password):
-    print(name,password)
 
 
 @app.route('/orderconfirmation', methods=["GET", "POST"])
 def orderconfirmation():
     return render_template("orderconfirmation.html")
 
+
+@app.route('/registerconfirmation', methods=["GET", "POST"])
+def registerconfirmation():
+    return render_template("registerconfirmation.html")
+
+@app.route('/request_1', methods=["GET", "POST"])
+def request_1():
+    return render_template("request_1.html")
+
+@app.route('/Invalid', methods=["GET", "POST"])
+def Invalid():
+    return render_template("Invalid.html")
+
+@app.route('/volunteer/<name>/', methods=['GET', 'POST'])
+def display(name):
+    if request.method == "POST":
+        if request.form['opt'] == 'accept':
+            allocate_order(name)
+            return redirect(url_for('request_1'))
+        else:
+            return redirect(url_for('request_1'))
+    list1 = get_patients(name)
+    return render_template('value.html', name=name, patients=list1)
+
+
 if __name__ == '__main__':
     app.run()
+
+
+
+
+
