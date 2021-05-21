@@ -55,10 +55,6 @@ def patient_list():
         NUMBER INT NOT NULL);''')
         conn.execute("INSERT INTO PATIENTS (ID,NAME,ADDRESS,PIN,QUANTITY,FOOD,STATUS,NUMBER) \
           VALUES (2387,'Kshama','Ramanjaneya Nagar', 560061, 4,'VEG','NOT TAKEN',9876543210 )")
-        conn.execute("INSERT INTO PATIENTS (ID,NAME,ADDRESS,PIN,QUANTITY,FOOD,STATUS,NUMBER) \
-              VALUES (6348,'Akarsh','Vidyapeetha', 560063, 3,'NON VEG','NOT TAKEN',9876543210 )")
-        conn.execute("INSERT INTO PATIENTS (ID,NAME,ADDRESS,PIN,QUANTITY,FOOD,STATUS,NUMBER) \
-              VALUES (2075,'Suraj','JP NAGAR', 560061,6,'VEG','TAKEN',9876543210 )")
         conn.commit()
     conn.close()
 
@@ -158,6 +154,15 @@ def get_patients(v_name):
         l.append(names)
     return l
 
+
+def deallocate(v_name):
+    conn = sqlite3.connect('test1.db')
+    sql_update_query = """Update VOLUNTEERS set STATUS = 'UNAVAILABLE' where NAME =? """
+    cursor4 = conn.cursor()
+    cursor4.execute(sql_update_query, (v_name,))
+    conn.commit()
+    conn.close()
+
 def allocate_order(v_name):
     conn = sqlite3.connect('test1.db')
     global v_pin, v_food, v_id, p_no
@@ -185,7 +190,7 @@ def allocate_order(v_name):
         cursor5 = conn.cursor()
         cursor5.execute(sql_update_query1, data1)
         conn.commit()
-        sql_update_query = """Update VOLUNTEERS set STATUS = 'UNAVAILABLE' where NUMBER = ?"""
+        sql_update_query = """Update VOLUNTEERS set STATUS = 'UNAVAILABLE' where ID = ?"""
         cursor4 = conn.cursor()
         cursor4.execute(sql_update_query, (v_id,))
         conn.commit()
@@ -204,6 +209,76 @@ def allocate_order(v_name):
         cursor6 = conn.cursor()
         cursor6.execute(sql_update_query2, (p_no,))
         conn.commit()
+    else:
+        cursor1 = conn.cursor()
+        cursor1.execute("SELECT * FROM PATIENTS WHERE PIN = ? AND FOOD = ? AND STATUS = ?",
+                        (v_pin-1, v_food, 'NOT TAKEN'))
+        data = cursor1.fetchall()
+        if(len(data)!=0):
+            sql_select_query2 = """select * from PATIENTS where PIN = ? and FOOD = ? and STATUS = ?"""
+            cursor2 = conn.cursor()
+            cursor2.execute(sql_select_query2, (v_pin-1, v_food, 'NOT TAKEN'))
+            for row in cursor2:
+                p_no = row[7]
+            sql_update_query1 = """Update PATIENTS set ID = ? where NUMBER = ?"""
+            data1 = (v_id, p_no)
+            cursor5 = conn.cursor()
+            cursor5.execute(sql_update_query1, data1)
+            conn.commit()
+            sql_update_query = """Update VOLUNTEERS set STATUS = 'UNAVAILABLE' where ID = ?"""
+            cursor4 = conn.cursor()
+            cursor4.execute(sql_update_query, (v_id,))
+            conn.commit()
+            sql_select_query3 = """select * from PATIENTS where PIN = ? and FOOD = ? and STATUS = ?"""
+            cursor3 = conn.cursor()
+            cursor3.execute(sql_select_query3, (v_pin-1, v_food, 'NOT TAKEN'))
+            for row in cursor3:
+                print("NAME = ", row[0])
+                print("ADDRESS = ", row[1])
+                print("PIN = ", row[2])
+                print("QUANTITY = ", row[3])
+                print("FOOD = ", row[4])
+                print("STATUS = ", row[5])
+                print("NUMBER = ", row[6])
+            sql_update_query2 = """Update PATIENTS set STATUS = 'TAKEN' where NUMBER = ?"""
+            cursor6 = conn.cursor()
+            cursor6.execute(sql_update_query2, (p_no,))
+            conn.commit()
+        else:
+            cursor1 = conn.cursor()
+            cursor1.execute("SELECT * FROM PATIENTS WHERE PIN = ? AND FOOD = ? AND STATUS = ?",
+                            (v_pin + 1, v_food, 'NOT TAKEN'))
+            data = cursor1.fetchall()
+            if(len(data)!=0):
+                sql_select_query2 = """select * from PATIENTS where PIN = ? and FOOD = ? and STATUS = ?"""
+                cursor2 = conn.cursor()
+                cursor2.execute(sql_select_query2, (v_pin + 1, v_food, 'NOT TAKEN'))
+                for row in cursor2:
+                    p_no = row[7]
+                sql_update_query1 = """Update PATIENTS set ID = ? where NUMBER = ?"""
+                data1 = (v_id, p_no)
+                cursor5 = conn.cursor()
+                cursor5.execute(sql_update_query1, data1)
+                conn.commit()
+                sql_update_query = """Update VOLUNTEERS set STATUS = 'UNAVAILABLE' where ID = ?"""
+                cursor4 = conn.cursor()
+                cursor4.execute(sql_update_query, (v_id,))
+                conn.commit()
+                sql_select_query3 = """select * from PATIENTS where PIN = ? and FOOD = ? and STATUS = ?"""
+                cursor3 = conn.cursor()
+                cursor3.execute(sql_select_query3, (v_pin + 1, v_food, 'NOT TAKEN'))
+                for row in cursor3:
+                    print("NAME = ", row[0])
+                    print("ADDRESS = ", row[1])
+                    print("PIN = ", row[2])
+                    print("QUANTITY = ", row[3])
+                    print("FOOD = ", row[4])
+                    print("STATUS = ", row[5])
+                    print("NUMBER = ", row[6])
+                sql_update_query2 = """Update PATIENTS set STATUS = 'TAKEN' where NUMBER = ?"""
+                cursor6 = conn.cursor()
+                cursor6.execute(sql_update_query2, (p_no,))
+                conn.commit()
     conn.close()
 
 

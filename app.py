@@ -16,9 +16,9 @@ def orderfood():
         patient_list()
         name = request.form.get("name")
         address = request.form.get("address")
-        pin= int(request.form.get('pin'))
+        pin= request.form.get('pin')
         quantity=int(request.form.get('quantity'))
-        number = int(request.form.get('number'))
+        number = request.form.get('number')
         BUnumber=int(request.form.get('BUnumber'))
         option = request.form.get('option')
         if option == 'veg':
@@ -37,10 +37,17 @@ def orderfood():
         else:
             pass
         suggestions = request.form.get("suggestions")
-        create_patient(name,address,pin,food,quantity,number)
-        return redirect(url_for('orderconfirmation'))
+        if len(number)!=10 or len(pin)!=6:
+            return redirect(url_for("details"))
+        else:
+            create_patient(name,address,int(pin),food,quantity,int(number))
+            return redirect(url_for('orderconfirmation'))
 
     return render_template("orderfood.html")
+
+@app.route('/details', methods=["GET", "POST"])
+def details():
+    return render_template("details.html")
 
 @app.route('/volunteer', methods=["GET", "POST"])
 def volunteer():
@@ -48,8 +55,8 @@ def volunteer():
         name = request.form.get("name")
         address = request.form.get("address")
         quantity = request.form.get("quantity")
-        pin= int(request.form.get('pin'))
-        number = int(request.form.get('number'))
+        pin= request.form.get('pin')
+        number = request.form.get('number')
         password = request.form.get('password')
         option = request.form.get('option')
         if option == 'veg':
@@ -58,8 +65,11 @@ def volunteer():
             food='nonveg'
         else:
             pass
-        registration_volunteer(name,password,number,address,pin,food,quantity)
-        return redirect(url_for('registerconfirmation'))
+        if len(number)!=10 or len(pin)!=6:
+            return redirect(url_for('details'))
+        else:
+            registration_volunteer(name,password,int(number),address,int(pin),food,quantity)
+            return redirect(url_for('registerconfirmation'))
 
     return render_template("volunteer.html")
 
@@ -102,6 +112,7 @@ def display(name):
             allocate_order(name)
             return redirect(url_for('request_1'))
         else:
+            deallocate(name)
             return redirect(url_for('request_1'))
     list1 = get_patients(name)
     return render_template('value.html', name=name, patients=list1)

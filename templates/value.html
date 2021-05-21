@@ -12,9 +12,12 @@
                 <ul type = 'none'>
                     <br><br>
                     <a href="/"><li><button id = 'head' type = 'submit' >Rootin' For You</button></li></a>
-                <br><br>
+                <br>
                 </ul>
             </div>
+        <font color="black" size="40px">
+            <h4 align="center"> Your orders:-</h4>
+            <br></font>
     {% for name in patients %}
         <font color="black"><h2 align="center">
 <li><span class="textlist"></span><input type="hidden" name="handles[]" value="{{ name }}"/>{{ name }}</li>
